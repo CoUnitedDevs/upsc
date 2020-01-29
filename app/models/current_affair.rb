@@ -1,0 +1,2 @@
+class CurrentAffair < ApplicationRecord
+end

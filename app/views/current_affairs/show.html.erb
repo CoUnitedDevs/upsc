@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @current_affair.name %>
+</p>
+
+<p>
+  <strong>Post on:</strong>
+  <%= @current_affair.post_on %>
+</p>
+
+<%= link_to 'Edit', edit_current_affair_path(@current_affair) %> |
+<%= link_to 'Back', current_affairs_path %>

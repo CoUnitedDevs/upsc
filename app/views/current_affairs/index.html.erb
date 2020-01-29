@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Current Affairs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Post on</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @current_affairs.each do |current_affair| %>
+      <tr>
+        <td><%= current_affair.name %></td>
+        <td><%= current_affair.post_on %></td>
+        <td><%= link_to 'Show', current_affair %></td>
+        <td><%= link_to 'Edit', edit_current_affair_path(current_affair) %></td>
+        <td><%= link_to 'Destroy', current_affair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Current Affair', new_current_affair_path %>

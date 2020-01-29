@@ -1,0 +1,27 @@
+<%= form_with(model: current_affair, local: true) do |form| %>
+  <% if current_affair.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(current_affair.errors.count, "error") %> prohibited this current_affair from being saved:</h2>
+
+      <ul>
+      <% current_affair.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :post_on %>
+    <%= form.date_select :post_on %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
