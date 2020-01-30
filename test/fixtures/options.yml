@@ -3,7 +3,9 @@
 one:
   option: MyString
   question_id: 1
+  question: one
 
 two:
   option: MyString
   question_id: 1
+  question: two

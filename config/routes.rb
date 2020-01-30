@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :quizzes
   resources :questions
   resources :topics
-  resources :options
   resources :categories
   devise_for :users
   root "admin#index"

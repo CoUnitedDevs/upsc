@@ -1,0 +1,11 @@
+<div class="item form-group">
+  <div calss="nested-fields">
+    <%= f.label :option, :class=>"col-form-label col-md-3 col-sm-3 label-align" %>
+    <div class="col-md-6 col-sm-6 ">
+      <%= f.text_field :option, :class => "form-control" %>
+    </div>
+    <div class="col-md-3 col-sm-3 label-align">
+    <i class="fa fa-trash-o"><%= link_to_remove_association "", f%></i>
+    </div>
+  </div>
+</div>

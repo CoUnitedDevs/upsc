@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    @category = Category.all
   end
 
   # GET /questions/1/edit
@@ -25,9 +26,10 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-
+    @question.save
+    option_id = @question.options.where(option: params['answer']).first.id
     respond_to do |format|
-      if @question.save
+      if @question.update(answer_id: option_id)
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -69,6 +71,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:body, :answer_id, :note, :catrgory_id)
+      params.require(:question).permit(:body, :answer_id, :note, :catrgory_id, :answer, options_attributes: [:id, :option, :question_id, :_destroy])
     end
 end
