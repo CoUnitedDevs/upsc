@@ -32,9 +32,16 @@
   </div>
 
   <div class="item form-group">
-    <%= f.label :catrgory_id, :class=>"col-form-label col-md-3 col-sm-3 label-align"  %>
+    <%= f.label :question_type, :class=>"col-form-label col-md-3 col-sm-3 label-align"  %>
     <div class="col-md-6 col-sm-6 ">
-      <%= select("question", "catrgory_id", @category.collect {|p| [ p.name, p.id ] }, { include_blank: true }, :class => "form-control") %>
+      <%= select("question", "question_type", [ 'Quiz', 'CurrentAffair' ], { include_blank: true }, :class => "form-control") %>
+    </div>
+  </div>
+
+  <div class="item form-group">
+    <%= f.label :category_id, :class=>"col-form-label col-md-3 col-sm-3 label-align"  %>
+    <div class="col-md-6 col-sm-6 ">
+      <%= select("question", "category_id", @category.collect {|p| [ p.name, p.id ] }, { include_blank: true }, :class => "form-control") %>
     </div>
   </div>
   <div id="options">
@@ -51,9 +58,7 @@
   </div>
 <% end %>
 <script>
-  $('#question_body').click(function() {
-    alert($('#question_body').val())
-  });
+
 </script>
 <style>
   .label-align {

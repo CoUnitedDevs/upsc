@@ -1,14 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<!-- <p>
   <strong>Name:</strong>
-  <%= @quiz.name %>
-</p>
 
-<p>
+</p> -->
+
+<!-- <p>
   <strong>Post on:</strong>
-  <%= @quiz.post_on %>
-</p>
-
+  <%#= @quiz.post_on %>
+</p> -->
+<div class="x_panel">
+  <div class="x_title">
+    <h2><%= @quiz.name %></h2>
+    <div class="clearfix"></div>
+  </div>
+  <%= render 'quizquestion_form', quiz_question: @quiz_question %>
+</div>
 <%= link_to 'Edit', edit_quiz_path(@quiz) %> |
 <%= link_to 'Back', quizzes_path %>
