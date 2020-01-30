@@ -11,12 +11,17 @@
 <body class="nav-md login">
   <div class="container body">
     <div class="main_container ">
+      <h2 class="image">
+          <div class="text-center" style="padding: 80px; color: #fff;">
+            JANUARY INSIGHTS IAS CURRENT AFFAIRS – 2020
+          </div>
+      </h2>
       <% if user_signed_in? %>
       <%= render partial: 'layouts/left_menu' %>
       <%= render partial: 'layouts/top_menu' %>
       <% end %>
       <!-- <%# @user_error_messages =  ""%> -->
-      <div class="right_col" role="main">
+      <!-- <div class="right_col" role="main"> -->
         <div class="col-md-12">
           <div class ="pull-right">
             <!-- if notice.present? && !current_user.errors.messages.present? -->
@@ -32,11 +37,16 @@
         <div class="">
           <%= yield %>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </body>
 </html>
+<style>
+.image {
+  background-image: url(/assets/book3.png);
+}
+</style>
 <!-- <script>
       $(document).ready(function(){
          backButtonPrevention();
