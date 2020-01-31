@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "landing#home"
+  get 'online_exams/:id' => 'quiz_questions#online_exams'
   resources :quiz_questions
   resources :current_affairs
   resources :quizzes

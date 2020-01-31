@@ -1,0 +1,146 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag("/manage/student_exams", method: :post, id: "exam_form") do %>
+<div>
+  <div class="col-md-9">
+    <div class="panel">
+      <div class="panel-heading">
+        <span class="panel-icon">
+          <i class="fa fa-star"></i>
+        </span>
+        <span class="panel-title"> <%= @quiz.name %>
+          <div  style="float:right">Time Remaining:&nbsp;&nbsp;
+            <span class="text-danger" id="exam_countdown" style="float:right" data-minutes-left="<%= @time_limit %>"></span>
+          </div>
+          <!-- <div id="exam_countdown" style="float:right">
+          Time Remaining:&nbsp;&nbsp;<span class="text-danger" id="remaining_time"></span>
+        </div> -->
+      </span>
+    </div>
+    <div class="panel-body">
+
+      <%= hidden_field_tag :id, @quiz.id %>
+      <% @questions.each_with_index do |question, index| %>
+      <div id="question-<%= index + 1 %>" style="display:<%= index == 0 ? 'block' : 'none' %>" class="questions-overview">
+        Q<%= index + 1 %>&nbsp;&nbsp;<%= raw question.body %><br><br>
+        <div style="margin-left:20px">
+          <div class="col-md-12" style="margin-bottom:20px;">
+
+          </div>
+          <div class="col-md-12">
+            <div id="uncheck-link-<%= question.id %>" style="display:none;" class="well">
+              <i class="fa fa-warning"></i>
+              Don't want to attempt this question?
+              <a class="alert-link btn btn-xs btn-warning" onclick="check_uncheck(<%= question.id %>)">Click here  </a> to uncheck.
+            </div>
+          </div>
+
+          </div>
+          <br>
+          <a href="#" onclick="previous_question(<%= index + 1 %>)" class="btn btn-sm btn-primary <%= index == 0 ? 'disabled' : '' %>">Previous</a>
+          | <a href="#" onclick="next_question(<%= index + 1 %>)" class="btn btn-sm btn-primary <%= index == (@questions.length - 1) ? 'disabled' : '' %>">Next</a>
+          <div class="pull-right">
+            <%= submit_tag 'Finish', :class => "btn btn-sm btn-system" %>
+          </div>
+          <br><br>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="col-md-3">
+    <div class="panel">
+
+      <div class="panel-body" style="background: #e7e7e7;">
+        <a href="#" class="btn btn-sm btn-system" style="width: 20px;height: 20px;"></a> &nbsp;Attempted
+        <a href="#" class="btn btn-sm btn-default light" style="width: 20px;height: 20px;margin-left:10px"></a> &nbsp;Not Attempted
+      </div>
+  </br>
+  <div class="panel-body" style="background: #e7e7e7;">
+    <% @questions.each_with_index do |question, index| %>
+    <a onclick="show_clicked_question(<%= index + 1 %>)" href="#" class="btn btn-default light" style="width: 40px;margin-bottom:5px;" id="color-ques-<%= question.id %>">
+      <span style="font-size:14px"><%= index + 1 %></span>
+    </a>
+    <% end %>
+  </div>
+</br>
+
+</div>
+</div>
+</div>
+<% content_for :custom_scripts_for_page do %>
+<%#= javascript_include_tag "manage/jquery.countdown.js" %>
+<script>
+// $("#exam_countdown").countdown("<%= @time_limit %>", function (event) {
+//   $("#remaining_time").text(event.strftime('%H : %M : %S'));
+// }).on('finish.countdown', function(){
+//   $("#exam_form").submit();
+// });
+// $('#exam_countdown').startTimer({
+//   onComplete: function(){
+//     console.log('Complete');
+//    $("#exam_form").submit();
+//  }
+// });
+function previous_question(index){
+  $('#question-' + (index - 1)).css('display', 'block')
+  $('#question-' + (index)).css('display', 'none')
+}
+
+function next_question(index){
+  $('#question-' + (index + 1)).css('display', 'block')
+  $('#question-' + (index)).css('display', 'none')
+}
+
+function show_clicked_question(q_id){
+  var attrs = document.getElementsByClassName("questions-overview");
+  $.each(attrs, function (index, value) {
+    if(value.style['display'] == 'block'){
+      value.style['display'] = 'none';
+      var current_element = document.getElementById("question-" + q_id);
+      current_element.style['display'] = 'block';
+    }
+  });
+}
+
+function check_uncheck(q_id) {
+  console.log("ffff");
+  for (var i=0; i<5; ++i ){
+    if ($('#question_' + q_id + '_option_' + i).is(':checked')) {
+      $('#question_' + q_id + '_option_' + i).prop('checked', false);
+      $('#color-ques-' + q_id).removeClass('btn-system');
+      $('#uncheck-link-' + q_id).hide();
+    }
+  }
+}
+
+// first time initialization
+// $("input:radio:checked").data("chk",true);
+//     $("input:radio").click(function(){
+//         $("input[name='"+$(this).attr("name")+"']:radio").not(this).removeData("chk");
+//         $(this).data("chk",!$(this).data("chk"));
+//         $(this).prop("checked",$(this).data("chk"));
+//         $(this).button('refresh'); // in case you change the radio elements dynamically
+//     });
+//check_uncheck('#question_#{question.id}_option_#{i}', '#{question.id}');
+// function check_uncheck(ques, q_id){
+//   console.log("check & uncheck");
+// //$(ques).data("chk",true);
+//     //$(ques).click(function(){
+//       console.log("click test" + q_id);
+//       console.log($("input[name='"+$(ques).attr("name")+"']:radio").data("chk", true));
+//         $("input[name='"+$(ques).attr("name")+"']:radio").not(ques).removeData("chk");
+//         $(ques).data("chk",!$(ques).data("chk"));
+//         $(ques).prop("checked",$(ques).data("chk"));
+//         //console.log("color quest");
+//         if ($(ques).is(':checked'))//(document.getElementById('color-ques-' + q_id).classList.contains('btn-system'))
+//           $('#color-ques-' + q_id).addClass('btn-system');
+//         else {
+//           $('#color-ques-' + q_id).removeClass('btn-system');
+//          }
+//     //});
+//   }
+</script>
+<% end %>

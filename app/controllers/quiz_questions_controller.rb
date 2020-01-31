@@ -61,6 +61,13 @@ class QuizQuestionsController < ApplicationController
     end
   end
 
+  def online_exams
+    @quiz_questions = QuizQuestion.all
+    @quiz = Quiz.first
+    @questions = Question.all
+    @time_limit = 30
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz_question
