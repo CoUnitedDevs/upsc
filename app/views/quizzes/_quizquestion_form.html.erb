@@ -1,0 +1,32 @@
+<%= form_with(model: quiz_question, local: true) do |f| %>
+  <% if quiz_question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quiz_question.errors.count, "error") %> prohibited this quiz_question from being saved:</h2>
+
+      <ul>
+      <% quiz_question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :quiz_id, value: @quiz.id, :class => "form-control" %>
+
+  <div class="item form-group">
+    <%= f.label :question_id, :class=>"col-form-label col-md-3 col-sm-3 label-align"  %>
+    <div class="col-md-7 col-sm-7 ">
+      <%= select("quiz_question", "question_id", @quesions.collect {|p| [ p.body, p.id ] }, { include_blank: true }, :class => "form-control") %>
+    </div>
+  </div>
+
+  <div class="actions col-md-6 col-sm-6 offset-md-3 label-align"">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<style>
+  .label-align {
+    text-align: -webkit-right;
+  }
+</style>

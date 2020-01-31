@@ -10,6 +10,8 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
+    @quiz_question = QuizQuestion.new
+    @quesions = Question.where(question_type: "Quiz")
   end
 
   # GET /quizzes/new

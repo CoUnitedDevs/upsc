@@ -1,34 +1,20 @@
 <p id="notice"><%= notice %></p>
+<div class="12" style="padding: 50px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2><%= @topic.name %></h2><hr style="margin-top: 0px; margin-bottom: 10px;">
+      <small class="col-md-2" style="margin-left: -10px;"><span class="glyphicon glyphicon-time" style="color: #f10d89;">&nbsp;</span><%= (@topic.created_at).strftime(" %B %d, %Y") %></small>
+      <small class="col-md-2" style="margin-left: -10px"><span class="glyphicon glyphicon-user" style="color: red;">&nbsp;</span>Posted by: Insights Editor</small>
+      <small class="col-md-2" style="margin-right: 10px"><span class="glyphicon glyphicon-flag" style="color: green;">&nbsp;</span>Category:	INSIGHTS</small>
+      <small class="col-md-6" style="margin-right: 10px"><span class="glyphicon glyphicon-book" style="color: #333333;">&nbsp;</span>Topics Covered:	<%= @topic.topics_covered %></small><br>
+    </div>
+    <div class="panel-body">
+      <p>
+        <%= @topic.body.html_safe %>
+      </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @topic.name %>
-</p>
-
-<p>
-  <strong>Topics covered:</strong>
-  <%= @topic.topics_covered %>
-</p>
-
-<p>
-  <strong>Created by:</strong>
-  <%= @topic.created_by %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @topic.body %>
-</p>
-
-<p>
-  <strong>Current affairs:</strong>
-  <%= @topic.current_affairs_id %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @topic.category_id %>
-</p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%#= link_to 'Edit', edit_topic_path(@topic) %> |
+<%#= link_to 'Back', topics_path %>
