@@ -1,22 +1,27 @@
+<h2 class="image">
+    <div class="text-center insight-upsc" style="padding: 80px; color: #fff;">
+      <h1>INSIGHTS IAS UPSC CURRENT AFFAIRS</h1>
+    </div>
+</h2>
 <div class="col-md-10" style="padding-top: 50px; padding-left: 50px;">
   <h2>JANUARY INSIGHTS IAS CURRENT AFFAIRS – 2020</h2>
   <div class="panel-group" id="accordion">
-    <% (1..3).each do |i| %>
+    <% @current_affairs.includes(:topics).each do |ca| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <font data-toggle="collapse" data-parent="#accordion" class="pointer" href="#<%= i %>"><%= i %></font>
+          <font data-toggle="collapse" data-parent="#accordion" class="pointer" href="#"><%= ca.name %></font>
         </h4>
       </div>
-      <div id="<%= i %>" class="panel-collapse collapse <%= i == 1 ? 'in' : '' %>">
+      <% ca.topics.each do |topic| %>
+      <div id="<%= topic.name %>" class="panel-collapse collapse in <%= Date.today.strftime("%d/%m/%Y") == topic.created_at.strftime("%d/%m/%Y")%>">
         <div class="panel-body">
-          <div class="list-group">
-            <a href="#" class="list-group-item">First item</a>
-            <a href="#" class="list-group-item">Second item</a>
-            <a href="#" class="list-group-item">Third item</a>
-          </div>
+          <!-- <div class="list-group"> -->
+            <a href="/topics/<%= topic.id %>" class="list-group-item"><%= topic.name %></a>
+          <!-- </div> -->
         </div>
       </div>
+      <% end %>
     </div>
     <% end %>
   </div>
@@ -27,11 +32,11 @@
       Daily Quiz
     </div>
     <div class="panel-body text-center">
-      <img src="/assets/quiz.jpeg" class="image" width="100%" height="80px"/><br/><br/>
+      <img src="/assets/quiz.jpeg" class="task-image" width="100%" height="80px"/><br/><br/>
       The following current affairs quiz will help in facing General Studies Paper – 1 of UPSC civil services preliminary exam. Questions will be both conceptual and factual. Current affairs form the bulk of UPSC IAS exam preparation. Solving daily questions based on current affairs will help you both understand issues and remember facts better.
       <br/>
       <br/>
-      <button type="button" class="btn btn-default">Take Test</button>
+      <a href="/online_exams/<%= @quiz.id %>" type="button" class="btn btn-primary">Take Test</a>
     </div>
   </div>
 </div>
@@ -42,11 +47,25 @@
 .pointer {
   cursor: pointer;
 }
-.image {
+.task-image {
   filter: blur(0px);
  -webkit-filter: blur(0px);
   background-color: transparent !important;
   background-image: url(/assets/quiz.jpeg);
+}
+.image {
+  background-image: url(/assets/book3.png);
+}
+h1 {
+  position: absolute;
+  /* background: rgb(0, 0, 0);  */
+  /* Fallback color */
+  /* background: rgba(0, 0, 0, 0.5);  */
+  /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  /* padding: 20px; */
+  font-weight: 700;
 }
 .insight-upsc {
   color: black;

@@ -34,13 +34,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :current_affairs_id %>
-    <%= form.number_field :current_affairs_id %>
+    <%= form.label :current_affair_id %>
+    <%= select("topic", "current_affair_id", @current_affairs.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
     <%= form.label :category_id %>
-    <%= form.number_field :category_id %>
+    <%= select("topic", "category_id", @categories.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
   </div>
 
   <div class="actions">

@@ -20,13 +20,17 @@
     <div class="panel-body">
 
       <%= hidden_field_tag :id, @quiz.id %>
-      <% @questions.each_with_index do |question, index| %>
+      <% @questions.includes(:options).each_with_index do |question, index| %>
       <div id="question-<%= index + 1 %>" style="display:<%= index == 0 ? 'block' : 'none' %>" class="questions-overview">
         Q<%= index + 1 %>&nbsp;&nbsp;<%= raw question.body %><br><br>
         <div style="margin-left:20px">
+          <% question.options.each do |option| %>
           <div class="col-md-12" style="margin-bottom:20px;">
-
+            <div class="iradio_flat-green checked" style="position: relative;">
+            <input type="radio" class="flat" checked="" name="iCheck" style="position: absolute; opacity: 0;">
+            </div> <%=  option.option %>
           </div>
+          <% end %>
           <div class="col-md-12">
             <div id="uncheck-link-<%= question.id %>" style="display:none;" class="well">
               <i class="fa fa-warning"></i>
