@@ -19,9 +19,11 @@
       <% if user_signed_in? %>
       <%= render partial: 'layouts/left_menu' %>
       <%= render partial: 'layouts/top_menu' %>
+      <div class="right_col" role="main">
+      <% else %>
+      <div>
       <% end %>
       <!-- <%# @user_error_messages =  ""%> -->
-      <div class="right_col" role="main">
         <div class="col-md-12">
           <div class ="pull-right">
             <!-- if notice.present? && !current_user.errors.messages.present? -->
