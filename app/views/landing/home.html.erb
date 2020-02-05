@@ -10,17 +10,21 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <font data-toggle="collapse" data-parent="#accordion" class="pointer" href="#"><%= ca.name %></font>
+          <font data-toggle="collapse" data-parent="#accordion" class="pointer" href="#"><%= ca.name %>-02-feb-2021</font>
         </h4>
       </div>
-      <% ca.topics.each do |topic| %>
-      <div id="<%= topic.name %>" class="panel-collapse collapse in <%= Date.today.strftime("%d/%m/%Y") == topic.created_at.strftime("%d/%m/%Y")%>">
-        <div class="panel-body">
-          <!-- <div class="list-group"> -->
-            <a href="/topics/<%= topic.id %>" class="list-group-item"><%= topic.name %></a>
-          <!-- </div> -->
+      <% ca.topics.group_by(&:category).each do |key,topic| %>
+      <br/>
+      <div class="list-group key-font-weight" style="margin-left:30px"> <span><%= key %>:</span> </div><br/>
+      <% topic.each_with_index do |t, index| %>
+      <div id="<%= t.name %>" class="panel-collapse collapse in <%= Date.today.strftime("%d/%m/%Y") == t.created_at.strftime("%d/%m/%Y")%>">
+        <!-- <div class="panel-body"> -->
+          <div class="list-group  key-font-weight" style="margin-left:30px">
+            <a href="/topics/<%= t.id %>" class="list-group-item"><%= index+1 %>.<%= t.name %></a>
+            <!-- </div> -->
+          </div>
         </div>
-      </div>
+      <% end %>
       <% end %>
     </div>
     <% end %>
@@ -70,5 +74,9 @@ h1 {
 .insight-upsc {
   color: black;
   font-weight: 600;
+}
+.key-font-weight {
+  font-weight: 600;
+  font-size: 17px;
 }
 </style>
