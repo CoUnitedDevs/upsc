@@ -21,6 +21,8 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    @current_affairs = CurrentAffair.all
+    @categories = Category.all
   end
 
   # POST /topics

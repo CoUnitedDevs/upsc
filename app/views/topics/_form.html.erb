@@ -40,7 +40,7 @@
 
   <div class="field">
     <%= form.label :category %>
-    <%= select("topic", "category_id", @categories.collect {|p| [ p.name, p.namw ] }, { include_blank: true }) %>
+    <%= select("topic", "category", @categories.collect {|p| [ p.name, p.name ] }, { include_blank: true }) %>
   </div>
 
   <div class="actions">
